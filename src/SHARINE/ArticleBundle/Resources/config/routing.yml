@@ -1,0 +1,31 @@
+sharine_article_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: SHARINEArticleBundle:Default:index }
+
+nouvelle_publication:
+    path:     /nouvelle_publication
+    defaults: { _controller: SHARINEArticleBundle:Article:nouveau }
+
+mes_publication:
+    path:     /mes_publication
+    defaults: { _controller: SHARINEArticleBundle:Article:mesPublication }
+
+administration:
+    path:     /administration
+    defaults: { _controller: SHARINEUserBundle:Default:administration }
+
+publication:
+    path:     /publication
+    defaults: { _controller: SHARINEArticleBundle:Article:publication }
+
+publicationAdmin:
+    path:     /publicationAdmin
+    defaults: { _controller: SHARINEArticleBundle:Article:publicationAdmin }
+
+validerPublication:
+    path:     /validerPublication/{id}
+    defaults: { _controller: SHARINEArticleBundle:Article:validerPublication, id:null }
+
+refuserPublication:
+    path:     /refuserPublication
+    defaults: { _controller: SHARINEArticleBundle:Article:refuserPublication}

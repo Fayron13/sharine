@@ -1,0 +1,21 @@
+{% extends "::layout.html.twig" %}
+{% block title %}Accueil - Sharine{% endblock %}
+{% block section %}
+{% endblock %}
+{% block login %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-offset-1 col-lg-10">
+                <div class="nav navbar-inverse">
+                    <h1 class="text-center" style="color: #2aabd2">Inscription terminée !</h1>
+                </div>
+                </br>
+                <div id="mainn" class=" jumbotron text-center">
+                    {% block fos_user_content %}
+                        <p>Vous allez recevoir un email de confirmation sur votre adresse mail.</p>
+                    {% endblock fos_user_content %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock login %}

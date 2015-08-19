@@ -1,0 +1,114 @@
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <a href="#" class="navbar-brand">Sharine</a>
+        {% if is_granted('ROLE_USER') %}
+            <div class="container text-center">
+                {% if app.request.attributes.get('_route') != 'fos_user_registration_confirmed'
+                and   app.request.attributes.get('_route') != 'fos_user_registration_register'
+                and   app.request.attributes.get('_route') != 'fos_user_registration_check_email'
+                and   app.request.attributes.get('_route') != 'fos_user_registration_confirm'
+                and   app.request.attributes.get('_route') != 'fos_user_resetting_request'
+                and   app.request.attributes.get('_route') != 'fos_user_resetting_check_email'
+                and   app.request.attributes.get('_route') != 'fos_user_resetting_reset'
+                and   app.request.attributes.get('_route') != 'fos_user_change_password'
+                and   app.request.attributes.get('_route') != 'fos_user_resetting_send_email' %}
+                    <button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse2">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                {% endif %}
+                <div class="collapse navbar-collapse navHeaderCollapse2">
+                    {% if app.request.attributes.get('_route') != 'fos_user_registration_confirmed'
+                    and   app.request.attributes.get('_route') != 'fos_user_registration_register'
+                    and   app.request.attributes.get('_route') != 'fos_user_registration_check_email'
+                    and   app.request.attributes.get('_route') != 'fos_user_registration_confirm'
+                    and   app.request.attributes.get('_route') != 'fos_user_resetting_request'
+                    and   app.request.attributes.get('_route') != 'fos_user_resetting_check_email'
+                    and   app.request.attributes.get('_route') != 'fos_user_resetting_reset'
+                    and   app.request.attributes.get('_route') != 'fos_user_change_password'
+                    and   app.request.attributes.get('_route') != 'fos_user_resetting_send_email' %}
+                        <ul class="nav navbar-nav nav-tabs">
+                            <li class="active"><a href="{{ path('sharine_user_homepage') }}" style="cursor: pointer">Accueil<span
+                                            class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Publications<b
+                                            class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{{ path('nouvelle_publication') }}">Nouvelle</a></li>
+                                    <li><a href="{{ path('mes_publication') }}">Mes publications</a></li>
+                                </ul>
+                            </li>
+                            {#<li><a href="#">Exams<span class="sr-only">(current)</span></a></li>#}
+                            {#<li><a href="#">Survey<span class="sr-only">(current)</span></a></li>#}
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administration<b
+                                                class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="{{ path('administration') }}">Valider/refuser</a></li>
+                                        <li><a href="#">Utilisateurs</a></li>
+                                    </ul>
+                                </li>
+                            {% endif %}
+                        </ul>
+
+                        <a id="deconnexion" class="navbar-brand pull-right"
+                           href="{{ path('fos_user_security_logout') }}"><span
+                                    class="glyphicon glyphicon-log-out"></span>
+                            Deconnexion</a>
+                        <a id="pseudo" class="navbar-brand pull-right"> Connecté en tant que
+                            : {{ app.user.username | capitalize }} </a>
+                    {% else %}
+                        <a id="inscription" class="navbar-brand pull-right"
+                           href="{{ path('fos_user_security_login') }}"><span
+                                    class="glyphicon glyphicon-user"></span>
+                            Connexion</a>
+                    {% endif %}
+                </div>
+            </div>
+        {% else %}
+            {% if app.request.attributes.get('_route') != 'fos_user_registration_register' %}
+                <div class="container text-center">
+                    <a id="inscription" class="navbar-brand pull-right"
+                       href="{{ path('fos_user_registration_register') }}"><span
+                                class="glyphicon glyphicon-user"></span>
+                        S'inscrire</a>
+                </div>
+            {% endif %}
+            {% if app.request.attributes.get('_route') != 'fos_user_security_login' %}
+                <div class="container text-center">
+                    <a id="inscription" class="navbar-brand pull-right"
+                       href="{{ path('fos_user_security_login') }}"><span
+                                class="glyphicon glyphicon-user"></span>
+                        Connexion</a>
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+</div>
+<script>
+    {#$(document).on("click", "#connexion", function (e) {#}
+    {#$.ajax({#}
+    {#url: "{{path('fos_user_security_login')}}",#}
+    {#type: 'GET',#}
+    {#dataType: 'html',#}
+    {#success: function (code) {#}
+    {#bootbox.dialog({#}
+    {#message: code,#}
+    {#title: "Connexion"#}
+    {#});#}
+    {#}#}
+    {#})#}
+    {#});#}
+
+    {#$(document).on("click", "#deconnexion", function (e) {#}
+    {#document.location.href = "http://localhost/projetphp/controller/deconnexion.php";#}
+    {#});#}
+
+    //    $("#inscription").on("click", function () {
+    //        document.location.href = "http://localhost/projetphp/views/inscription.php";
+    //    })
+
+</script>

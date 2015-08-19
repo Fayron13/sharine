@@ -1,0 +1,29 @@
+{% extends "::layout.html.twig" %}
+{% block title %}Accueil - Sharine{% endblock %}
+{% block section %}
+{% endblock %}
+{% block login %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-offset-2 col-lg-8">
+                <div class="nav navbar-inverse">
+                    <h1 class="text-center" style="color: #2aabd2">Récupération de mot de passe</h1>
+                </div>
+                </br>
+                <div id="mainn" class=" jumbotron">
+                    {% if invalid_username is defined %}
+                        <div class="alert alert-danger">Ce pseudo n'existe pas.</div>
+                    {% endif %}
+                    {# Le formulaire, avec URL de soumission vers la route « login_check » comme on l'a vu #}
+                    <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request">
+                        <div class="form-group">
+                            <label for="username">Pseudo</label>
+                            <input type="text" class="form-control" id="username" name="username" value="" required="required"/>
+                        </div>
+                        <input type="submit" class="btn btn-info margin-top-15 pull-right" value="Valider"/>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock login %}

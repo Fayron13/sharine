@@ -1,0 +1,18 @@
+{% trans_default_domain 'FOSUserBundle' %}
+{% block subject %}
+    {% autoescape false %}
+    Publication refusée
+    {% endautoescape %}
+{% endblock %}
+{% block body_text %}
+    {% autoescape false %}
+    Bonjour {{ user }} !
+
+    La publication de votre annonce "{{ titre }}"  à été refusée par un administrateur pour les raisons suivantes :
+    {{ raison }}
+
+
+    Amicalement,
+    Administrateur de Sharine.
+    {% endautoescape %}
+{% endblock %}

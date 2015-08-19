@@ -1,0 +1,4 @@
+sharine_user_homepage:
+    path:     /home/{categorie}
+    defaults: {_controller: SHARINEUserBundle:Default:index, categorie:null}
+

@@ -1,0 +1,62 @@
+{% extends "::layout.html.twig" %}
+{% block title %}Accueil - Sharine{% endblock %}
+{% block section %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-offset-1 col-lg-10">
+                {% for art in article %}
+                    <div class="panel panel-primary">
+                        <div class="panel-heading" style="background-color: #222;color:#2aabd2">
+                            <h3 style="margin-top:0px"><img class="" style="width: 25px;"
+                                                            src="{{ asset(''~ art.categorie.img ~'') }}"> {{ art.categorie.nom | capitalize }}
+                                <small class="pull-right" style="">Posté le  {{ art.date | date('d-m-Y') }}</small>
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            {{ art.mainArticle | raw }}
+                        </div>
+                        <div class="panel-footer">
+                            {#<h3>#}
+                            <div class=" pull-right" style="color: #2aabd2;">
+                                <small class="">Rédigé
+                                    par <a>{{ art.user.username | capitalize }}</a></small>
+                            </div>
+                            {#</h3>#}
+                        </div>
+                    </div>
+                    {% if(app.request.get('_route')) == 'publicationAdmin' %}
+                        <div class="row">
+                            <a href="{{ path('validerPublication',{'id' : art.id}) }}"
+                               class="btn btn-success pull-left">Valider</a>
+                            <a id="refuser" class="btn btn-danger pull-right">Refuser</a></br>
+                        </div>
+                        <div class="row">
+                            <form action="{{ path('refuserPublication') }}" id="formRefuser"
+                                  class="hidden pull-right form-inline" method="POST" style="margin-top: 15px">
+                                <div class="form-group">
+                                    <label for="raisons">Raisons</label>
+                                    <input type="text" id="raisons" name="raison" class="form-control">
+                                </div>
+                                <input type="hidden" name="user" value="{{ art.user.id }}">
+                                <input type="hidden" name="titre" value="{{ art.titre }}">
+                                <input type="hidden" name="id" value="{{ art.id }}">
+                                <input type="submit" class="btn btn-success" value="Envoyer">
+                            </form>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            {#<div class="col-lg-1">#}
+
+            {#</div>#}
+        </div>
+    </div>
+    <script>
+        $("#refuser").on("click", function () {
+            $("#formRefuser").removeClass('hidden');
+        });
+    </script>
+
+    {% block login %}
+    {% endblock %}
+{% endblock %}

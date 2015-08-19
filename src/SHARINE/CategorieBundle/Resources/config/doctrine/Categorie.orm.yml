@@ -1,0 +1,18 @@
+SHARINE\CategorieBundle\Entity\Categorie:
+    type: entity
+    table: null
+    repositoryClass: SHARINE\CategorieBundle\Entity\CategorieRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        nom:
+            type: string
+            length: 255
+        img:
+            type: string
+            length: 255
+    lifecycleCallbacks: {  }

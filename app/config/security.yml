@@ -1,0 +1,59 @@
+# To get started with security, check out the documentation:
+# http://symfony.com/doc/current/book/security.html
+security:
+
+    encoders:
+        SHARINE\UserBundle\Entity\User: sha512
+
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+    # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
+    providers:
+        fos_userbundle:
+            id: fos_user.user_provider.username
+        in_memory:
+            memory:
+                users:
+                    user:  { password: userpass, roles: [ 'ROLE_USER' ] }
+                    admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+
+
+    access_control:
+        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/kcfinder*, role: ROLE_ADMIN }
+
+    firewalls:
+        # disables authentication for assets and the profiler, adapt it according to your needs
+       dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+
+       main_login:
+            # Cette expression régulière permet de prendre /login (mais pas /login_check !)
+            pattern:   ^/login$
+            anonymous: true # On autorise alors les anonymes sur ce pare-feu
+
+       main:
+#            id: fos_user.user_provider.username
+            pattern: ^/
+            anonymous: true
+            provider: fos_userbundle
+            form_login:
+                login_path: fos_user_security_login
+                check_path: fos_user_security_check
+                default_target_path: /home
+            logout:
+                path: fos_user_security_logout
+                target: /login
+            remember_me:
+                key: %secret%
+            # activate different ways to authenticate
+
+            # http_basic: ~
+            # http://symfony.com/doc/current/book/security.html#a-configuring-how-your-users-will-authenticate
+
+            # form_login: ~
+            # http://symfony.com/doc/current/cookbook/security/form_login_setup.html

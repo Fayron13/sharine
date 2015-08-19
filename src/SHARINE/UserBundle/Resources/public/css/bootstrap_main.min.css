@@ -1,0 +1,47 @@
+.navbar{
+    margin: 0px;
+    border-radius: 0px;
+}
+
+.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:focus, .navbar-inverse .navbar-nav > .active > a:hover{
+    background-color: #2aabd2;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus, .navbar-inverse .navbar-nav > li > a:active{
+    background-color: #2aabd2;
+}
+
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:focus, .navbar-inverse .navbar-nav > .open > a:hover{
+    background-color: #2aabd2;
+}
+
+.navbar-inverse .navbar-brand{
+    color: #2aabd2;
+}
+
+a.list-group-item:focus, a.list-group-item:hover, button.list-group-item:focus, button.list-group-item:hover{
+    background-color: #e9e9e9 ;
+}
+
+a.list-group-item:focus .list-group-item-heading, a.list-group-item:hover .list-group-item-heading, button.list-group-item:focus, button.list-group-item:hover .list-group-item-heading{
+    color: #2aabd2;
+}
+
+.cursors:hover{
+    cursor: pointer;
+    background-color: #e9e9e9;
+}
+
+.panel-body:hover h4{
+    color: #2aabd2;
+}
+
+h3{
+    margin-top: 0px;
+    margin-bottom: 5px;
+}
+
+.panel-footer{
+    height: 50px;
+    background-color: #222;
+}

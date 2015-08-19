@@ -1,0 +1,17 @@
+{% trans_default_domain 'FOSUserBundle' %}
+{% block subject %}
+    {% autoescape false %}
+    Inscription
+    {% endautoescape %}
+{% endblock %}
+{% block body_text %}
+    {% autoescape false %}
+    Bonjour {{ user.username }} !
+
+    Vous devez confirmer votre inscription en cliquant sur le lien suivant :
+    {{ confirmationUrl }}
+
+    Amicalement,
+    Administrateur de monsiteweb.com
+    {% endautoescape %}
+{% endblock %}

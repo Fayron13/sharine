@@ -1,0 +1,80 @@
+/* ========= MARGIN ================= */
+
+.margin-top-30{
+   margin-top: 30px;
+}
+.margin-left-30{
+    margin-left: 30px;
+}
+.margin-right-30{
+    margin-right: 30px;
+}
+.margin-bottom-30{
+    margin-bottom: 30px;
+}
+
+/* ========= Modale ================= */
+
+.modal-header {
+    background-color: #222;
+    color: #2aabd2;
+    text-align: center;
+}
+
+/* ========= Menu ================= */
+
+.dropdown-menu{
+    background-color: #222222;
+    color: #2aabd2;
+}
+
+.dropdown-menu > li > a{
+    color: white;
+}
+
+.dropdown-menu > li > a:hover{
+    background-color: #2aabd2;
+}
+
+
+
+/*html{*/
+    /*height: 100%;*/
+/*}*/
+
+#mainn{
+    height: 100%;
+}
+
+.navbar-inverse .navbar-text{
+    color: #2aabd2;
+}
+
+body{
+    background-image: url('../img/fondd.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    margin-top: 70px;
+    margin-bottom: 70px;
+    height: 100%;
+
+}
+
+.page-header{
+    margin-top: 0;
+}
+
+.panel-body{
+    padding-top: 0;
+}
+
+.featuredImg{
+    max-width: 100%;
+    /*margin-bottom: 15px;*/
+    max-height: 200px;
+}
+
+.list-group > a{
+    margin-bottom: 15px;
+}

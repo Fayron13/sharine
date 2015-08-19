@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PhpUnit">
+    <phpunit_settings>
+      <PhpUnitSettings bootstrap_file_path="$PROJECT_DIR$/src/SHARINE/UserBundle/Resources/public/css/bootstrap.min.css" configuration_file_path="http://localhost/Symfony/web/app_dev.php/home" custom_loader_path="" phpunit_phar_path="" use_bootstrap_file="true" use_configuration_file="true" />
+      <phpunit_by_deployment server_id="15c6fc06-092b-4d8f-9672-16c0ca1e1719" configuration_file_path="http:\\localhost\Symfony\web\app_dev.php\home" custom_loader_path="" phpunit_phar_path="" use_configuration_file="true" />
+    </phpunit_settings>
+  </component>
+</project>
