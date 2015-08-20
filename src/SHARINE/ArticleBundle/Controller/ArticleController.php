@@ -62,15 +62,14 @@ class ArticleController extends Controller
 
             ->setTo('maho.arthur.13@gmail.com')
 
-            ->setBody('bonjour');
+            ->setBody('Bonjour');
 
 
         $this->get('mailer')->send($message);
         return $this->render('SHARINEUserBundle:Registration:checkEmail.html.twig');
     }
 
-    public function publicationAction(){
-        $id = $_GET['id'];
+    public function publicationAction($id=null){
         $articles = $this->getDoctrine()->getManager()->getRepository('SHARINEArticleBundle:Article')->getArticlesByIdArticle($id);
         return $this->render('SHARINEArticleBundle:Article:bodyArticle.html.twig', array(
             'id' => $id,
@@ -78,8 +77,7 @@ class ArticleController extends Controller
         ));
     }
 
-    public function publicationAdminAction(){
-        $id = $_GET['id'];
+    public function publicationAdminAction($id=null){
         $articles = $this->getDoctrine()->getManager()->getRepository('SHARINEArticleBundle:Article')->getArticlesByIdArticle($id);
         return $this->render('SHARINEArticleBundle:Article:bodyArticle.html.twig', array(
             'id' => $id,
@@ -103,6 +101,7 @@ class ArticleController extends Controller
     public function refuserPublicationAction(){
         $raison = $this->get('request')->get('raison');
         $titre = $this->get('request')->get('titre');
+//        $image_id = $this->get('request')->get('img');
         $id = $this->get('request')->get('id');
         $user = $this->getDoctrine()->getManager()->getRepository('SHARINEUserBundle:User')->getUserById($this->get('request')->get('user'));
         $message = \Swift_Message::newInstance()
@@ -114,7 +113,12 @@ class ArticleController extends Controller
                                                                                                      'titre' => $titre)))
         ;
         $this->get('mailer')->send($message);
-        $this->getDoctrine()->getManager()->getRepository('SHARINEArticleBundle:Article')->deletePublication($id);
+        $art = $this->getDoctrine()->getManager()->getRepository('SHARINEArticleBundle:Article')->find($id);
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($art);
+        $em->flush();
+//        $this->getDoctrine()->getManager()->getRepository('SHARINEArticleBundle:Article')->deletePublication($id);
+//        $this->getDoctrine()->getManager()->getRepository('SHARINEArticleBundle:Image')->deleteImg($image_id);
         $articles = $this->getDoctrine()->getManager()->getRepository('SHARINEArticleBundle:Article')->getAllArticlesAdmin();
         $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate($articles, $this->get('request')->query->get('page', 1), 5);

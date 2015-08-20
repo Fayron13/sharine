@@ -12,4 +12,12 @@ use Doctrine\ORM\EntityRepository;
  */
 class ImageRepository extends EntityRepository
 {
+    public function deleteImg($id){
+        $qb = $this->_em->createQueryBuilder();
+        $q = $qb->delete('SHARINEArticleBundle:Image', 'a')
+            ->where('a.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery();
+        $p = $q->execute();
+    }
 }

@@ -15,12 +15,12 @@ administration:
     defaults: { _controller: SHARINEUserBundle:Default:administration }
 
 publication:
-    path:     /publication
-    defaults: { _controller: SHARINEArticleBundle:Article:publication }
+    path:     /publication/{id}
+    defaults: { _controller: SHARINEArticleBundle:Article:publication, id:null }
 
 publicationAdmin:
-    path:     /publicationAdmin
-    defaults: { _controller: SHARINEArticleBundle:Article:publicationAdmin }
+    path:     /publicationAdmin/{id}
+    defaults: { _controller: SHARINEArticleBundle:Article:publicationAdmin, id:null }
 
 validerPublication:
     path:     /validerPublication/{id}

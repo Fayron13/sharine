@@ -60,9 +60,9 @@ class Article
     /**
      * @var string
      *
-     * @ORM\Column(name="mainArticle", type="text")
+     * @ORM\Column(name="mainArticle", type="text", nullable=true)
      */
-    private $mainArticle;
+    private $mainArticle = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="SHARINE\UserBundle\Entity\User")
@@ -80,6 +80,7 @@ class Article
 
     /**
      * @ORM\OneToOne(targetEntity="SHARINE\ArticleBundle\Entity\Image", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="image_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $image;
 

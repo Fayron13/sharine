@@ -17,6 +17,11 @@
                     </br>
                     {% endif %}
                     {% for art in article %}
+                        {#{% if(app.request.get('_route') == 'administration') %}#}
+                            <a id="lien_{{ art.id }}" href="{{ path('publicationAdmin',{'id' : art.id}) }}">e</a>
+                        {#{% else %}#}
+                            {#<a id="lien" href="{{ path('publication',{'id' : art.id}) }}"></a>#}
+                        {#{% endif %}#}
                         <div class="panel panel-primary">
                             <div class="panel-heading" style="background-color: #222;color:#2aabd2">
                                 <h3 style="margin-top:0px"><img class="" style="width: 25px;"
@@ -24,26 +29,26 @@
                                     <small class="pull-right" style="">Posté le  {{ art.date | date('d-m-Y') }}</small>
                                 </h3>
                             </div>
-                                <div class="panel-body cursors" id="{{ art.id }}" style="">
-                                    <div class="page-header text-center" style="padding-bottom: 30px;">
-                                        <h3>
-                                            <div class="col-lg-12 " style="color: #2aabd2">
-                                                <small class="">Rédigé
-                                                    par <a>{{ art.user.username | capitalize }}</a></small>
-                                            </div>
-                                        </h3>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <img class="featuredImg"
-                                             src="{{ asset(art.image.uploadDir ~ '/' ~ art.image.id ~ '.' ~ art.image.url) }}"
-                                             alt="{{ art.image.alt }}">
-                                    </div>
-                                    <div class="col-lg-8">
-                                        <h4><strong>{{ art.titre | capitalize }}</strong></h4></br>
-
-                                        <p>{{ art.resume | capitalize }}.</p>
-                                    </div>
+                            <div class="panel-body cursors" id="{{ art.id }}" style="">
+                                <div class="page-header text-center" style="padding-bottom: 30px;">
+                                    <h3>
+                                        <div class="col-lg-12 " style="color: #2aabd2">
+                                            <small class="">Rédigé
+                                                par <a>{{ art.user.username | capitalize }}</a></small>
+                                        </div>
+                                    </h3>
                                 </div>
+                                <div class="col-lg-4">
+                                    <img class="featuredImg"
+                                         src="{{ asset(art.image.uploadDir ~ '/' ~ art.image.id ~ '.' ~ art.image.url) }}"
+                                         alt="{{ art.image.alt }}">
+                                </div>
+                                <div class="col-lg-8">
+                                    <h4><strong>{{ art.titre | capitalize }}</strong></h4></br>
+
+                                    <p>{{ art.resume | capitalize }}.</p>
+                                </div>
+                            </div>
                         </div>
                     {% endfor %}
                 </div>
@@ -69,12 +74,7 @@
     <script>
         $("div[class='panel-body cursors']").on("click", function () {
             var id = $(this).attr('id');
-            if(window.location.pathname == "/Symfony/web/app_dev.php/article/administration"){
-                window.location = "{{ path('publicationAdmin') }}?id=" + id;
-            }else{
-                window.location = "{{ path('publication') }}?id=" + id;
-            }
-
+            $('#lien_'+id).get(0).click();
         });
     </script>
 {% endblock %}
