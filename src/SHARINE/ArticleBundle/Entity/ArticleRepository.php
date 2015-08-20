@@ -20,10 +20,10 @@ class ArticleRepository extends EntityRepository
                 ->from('SHARINEArticleBundle:Article' , 'a')
                 ->join('a.categorie', 'i')
                 ->Where('i.nom = :categorie')
-                ->Where('a.is_active = 1')
+                ->andWhere('a.is_active = 1')
                 ->orderBy('a.id', 'DESC')
                 ->setMaxResults( 100 )
-                ->setParameter( 'categorie', $categorie )
+                ->setParameter( 'categorie',$categorie)
                 ->getQuery()
                 ->getResult();
         }else {
