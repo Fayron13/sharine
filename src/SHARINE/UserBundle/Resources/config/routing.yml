@@ -2,3 +2,11 @@ sharine_user_homepage:
     path:     /home/{categorie}
     defaults: {_controller: SHARINEUserBundle:Default:index, categorie:null}
 
+utilisateurGestion:
+    path:     /utilisateurGestion
+    defaults: {_controller: SHARINEUserBundle:Utilisateur:utilisateurGestion}
+
+archiverUser:
+    path:     /archiver/{idUser}
+    defaults: {_controller: SHARINEUserBundle:Utilisateur:archiverUser, idUser:null}
+

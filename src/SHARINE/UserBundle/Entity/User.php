@@ -24,6 +24,13 @@ class User extends BaseUser
     protected $id;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="is_archive", type="integer", options={"default" = 0})
+     */
+    private $is_archive;
+
+    /**
      * Get id
      *
      * @return integer
@@ -33,4 +40,27 @@ class User extends BaseUser
         return $this->id;
     }
 
+
+    /**
+     * Set is_archive
+     *
+     * @param integer $isArchive
+     * @return User
+     */
+    public function setIsArchive($isArchive)
+    {
+        $this->is_archive = $isArchive;
+
+        return $this;
+    }
+
+    /**
+     * Get is_archive
+     *
+     * @return integer 
+     */
+    public function getIsArchive()
+    {
+        return $this->is_archive;
+    }
 }

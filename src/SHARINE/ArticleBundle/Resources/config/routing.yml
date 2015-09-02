@@ -11,8 +11,8 @@ mes_publication:
     defaults: { _controller: SHARINEArticleBundle:Article:mesPublication }
 
 administration:
-    path:     /administration
-    defaults: { _controller: SHARINEUserBundle:Default:administration }
+    path:     /administration/{categorie}
+    defaults: { _controller: SHARINEUserBundle:Default:administration, categorie:null }
 
 publication:
     path:     /publication/{id}
@@ -29,3 +29,7 @@ validerPublication:
 refuserPublication:
     path:     /refuserPublication
     defaults: { _controller: SHARINEArticleBundle:Article:refuserPublication}
+
+utilisateurGestion:
+    path:     /utilisateurGestion
+    defaults: {_controller: SHARINEUserBundle:Utilisateur:utilisateurGestion}

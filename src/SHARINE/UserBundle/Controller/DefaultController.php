@@ -33,8 +33,12 @@ class DefaultController extends Controller
 
     }
 
-    public function administrationAction(){
-    $articles = $this->getDoctrine()->getManager()->getRepository('SHARINEArticleBundle:Article')->getAllArticlesAdmin();
+    public function administrationAction($categorie=null){
+        if(isset($categorie) and $categorie != null){
+            $articles = $this->getDoctrine()->getManager()->getRepository('SHARINEArticleBundle:Article')->getAllArticlesAdmin($categorie);
+        }else{
+            $articles = $this->getDoctrine()->getManager()->getRepository('SHARINEArticleBundle:Article')->getAllArticlesAdmin();
+        }
         $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate($articles, $this->get('request')->query->get('page', 1), 5);
         $categories = $this->getDoctrine()->getManager()->getRepository('SHARINECategorieBundle:Categorie')->getAllCategories();

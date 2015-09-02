@@ -36,8 +36,8 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Publications<b
                                             class="caret"></b></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="{{ path('nouvelle_publication') }}">Nouvelle</a></li>
-                                    <li><a href="{{ path('mes_publication') }}">Mes publications</a></li>
+                                    <li class="text-center"><a href="{{ path('nouvelle_publication') }}">Nouvelle</a></li>
+                                    <li class="text-center"><a href="{{ path('mes_publication') }}">Mes publications</a></li>
                                 </ul>
                             </li>
                             {#<li><a href="#">Exams<span class="sr-only">(current)</span></a></li>#}
@@ -47,8 +47,8 @@
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administration<b
                                                 class="caret"></b></a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="{{ path('administration') }}">Valider/refuser</a></li>
-                                        <li><a href="#">Utilisateurs</a></li>
+                                        <li class="text-center"><a href="{{ path('administration') }}">Valider/refuser</a></li>
+                                        <li class="text-center"><a href="{{ path('utilisateurGestion') }}">Gestion utilisateurs</a></li>
                                     </ul>
                                 </li>
                             {% endif %}

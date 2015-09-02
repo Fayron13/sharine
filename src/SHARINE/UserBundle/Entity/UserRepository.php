@@ -22,4 +22,13 @@ class UserRepository extends EntityRepository
             ->getArrayResult();
     }
 
+    public function getNomEmail(){
+        return $this->_em->createQueryBuilder()
+            ->select('a.id,a.username,a.email,a.is_archive')
+            ->from('SHARINEUserBundle:User' , 'a')
+            ->orderBy('a.is_archive,a.username')
+            ->getQuery()
+            ->getResult();
+    }
+
 }

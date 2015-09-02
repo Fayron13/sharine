@@ -36,6 +36,14 @@ a.list-group-item:focus .list-group-item-heading, a.list-group-item:hover .list-
     color: #2aabd2;
 }
 
+.panel-body{
+    border-radius: 5%;
+}
+
+thead{
+    background-color: #19AAD8;
+}
+
 h3{
     margin-top: 0px;
     margin-bottom: 5px;
@@ -44,4 +52,12 @@ h3{
 .panel-footer{
     height: 50px;
     background-color: #222;
+}
+
+.noMargin{
+    margin: 0px;
+}
+
+.noPadding{
+    padding: 0px;
 }

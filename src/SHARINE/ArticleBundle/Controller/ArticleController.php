@@ -44,7 +44,7 @@ class ArticleController extends Controller
 
         return $this->render('SHARINEUserBundle:Home:accueil.html.twig', array(
             'categorie' => $categories,
-            'article' => $pagination,
+            'article' => $articles,
             'pagination' => $pagination,
             'menu_cat' => "menu_cat"
         ));
