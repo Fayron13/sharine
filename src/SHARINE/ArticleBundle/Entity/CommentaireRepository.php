@@ -12,4 +12,18 @@ use Doctrine\ORM\EntityRepository;
  */
 class CommentaireRepository extends EntityRepository
 {
+
+    public function getCommentairesByArticle($idArticle){
+        return $this->_em->createQueryBuilder()
+            ->select('u.username,c.date,c.message,a.titre,c.titre,c.id')
+            ->from('SHARINEArticleBundle:Commentaire' , 'c')
+            ->join('c.article', 'a')
+            ->join('c.user', 'u')
+            ->Where('a.id = :id')
+            ->andWhere('c.user = u.id')
+            ->orderBy('c.date', 'DESC')
+            ->setParameter( 'id', $idArticle )
+            ->getQuery()
+            ->getResult();
+    }
 }

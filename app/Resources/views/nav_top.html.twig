@@ -69,46 +69,19 @@
                 </div>
             </div>
         {% else %}
+            <div class="container text-center">
             {% if app.request.attributes.get('_route') != 'fos_user_registration_register' %}
-                <div class="container text-center">
                     <a id="inscription" class="navbar-brand pull-right"
                        href="{{ path('fos_user_registration_register') }}"><span
                                 class="glyphicon glyphicon-user"></span>
                         S'inscrire</a>
-                </div>
             {% endif %}
             {% if app.request.attributes.get('_route') != 'fos_user_security_login' %}
-                <div class="container text-center">
-                    <a id="inscription" class="navbar-brand pull-right"
-                       href="{{ path('fos_user_security_login') }}"><span
-                                class="glyphicon glyphicon-user"></span>
-                        Connexion</a>
-                </div>
+                    <a id="inscription" class="navbar-brand pull-right" href="{{ path('fos_user_security_login') }}"><span class="glyphicon glyphicon-user"></span>Connexion</a>
             {% endif %}
+            </div>
         {% endif %}
     </div>
 </div>
 <script>
-    {#$(document).on("click", "#connexion", function (e) {#}
-    {#$.ajax({#}
-    {#url: "{{path('fos_user_security_login')}}",#}
-    {#type: 'GET',#}
-    {#dataType: 'html',#}
-    {#success: function (code) {#}
-    {#bootbox.dialog({#}
-    {#message: code,#}
-    {#title: "Connexion"#}
-    {#});#}
-    {#}#}
-    {#})#}
-    {#});#}
-
-    {#$(document).on("click", "#deconnexion", function (e) {#}
-    {#document.location.href = "http://localhost/projetphp/controller/deconnexion.php";#}
-    {#});#}
-
-    //    $("#inscription").on("click", function () {
-    //        document.location.href = "http://localhost/projetphp/views/inscription.php";
-    //    })
-
 </script>

@@ -33,3 +33,11 @@ refuserPublication:
 utilisateurGestion:
     path:     /utilisateurGestion
     defaults: {_controller: SHARINEUserBundle:Utilisateur:utilisateurGestion}
+
+commentaireArticle:
+    path:     /commentaire
+    defaults: {_controller: SHARINEUserBundle:Article:commentaireArticle}
+
+deleteCommentaire:
+    path:     /delete-commentaire
+    defaults: {_controller: SHARINEArticleBundle:Article:deleteCommentaire}

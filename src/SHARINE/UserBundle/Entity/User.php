@@ -14,6 +14,12 @@ use FOS\UserBundle\Model\User as BaseUser;
  */
 class User extends BaseUser
 {
+//    public function __construct()
+//    {
+//        $this->is_archive = 0;
+////        $this->salt = 0;
+//    }
+
     /**
      * @var integer
      *
@@ -22,6 +28,13 @@ class User extends BaseUser
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->is_archive = 0;
+    }
 
     /**
      * @var integer

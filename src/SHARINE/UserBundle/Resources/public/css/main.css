@@ -78,3 +78,43 @@ body{
 .list-group > a{
     margin-bottom: 15px;
 }
+
+div.commentaireBody{
+    background-color: #fff;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 15px;
+    width: 700px;
+    min-height: 176px;
+    padding: 25px;
+    margin-left: 80px;
+}
+
+p.pArticleBody{
+    width: 650px;
+    min-height: 50px;
+    line-height: 20px;
+    font-size: 14px;
+}
+
+p.pArticletitre{
+    width: 650px;
+    height: 20px;
+    line-height: 20px;
+    font-size: 18px;
+}
+
+footer.pArticleFooter{
+    width: 650px;
+    height: 31px;
+    line-height: 20px;
+    font-size: 14px;
+}
+
+#sharine_articlebundle_commentaire_message{
+    max-width: 700px;
+}
+
+#sharine_articlebundle_commentaire_titre, #sharine_articlebundle_commentaire_message{
+    margin-left: 80px;
+    width: 700px;
+}

@@ -10,3 +10,6 @@ archiverUser:
     path:     /archiver/{idUser}
     defaults: {_controller: SHARINEUserBundle:Utilisateur:archiverUser, idUser:null}
 
+changerStatusUser:
+    path:     /changer-status
+    defaults: {_controller: SHARINEUserBundle:Utilisateur:changerStatusUser}

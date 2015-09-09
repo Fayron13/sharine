@@ -7,8 +7,8 @@
                 {% for art in article %}
                     <div class="panel panel-primary">
                         <div class="panel-heading" style="background-color: #222;color:#2aabd2">
-                            <h3 style="margin-top:0px"><img class="" style="width: 25px;"
-                                                            src="{{ asset(''~ art.categorie.img ~'') }}"> {{ art.categorie.nom | capitalize }}
+                                <h3 style="margin-top:0px"><img class="" style="width: 25px;"
+                                                                src="{{ asset(''~ art.categorie.img ~'') }}"> {{ art.categorie.nom | capitalize }}
                                 <small class="pull-right" style="">Posté le  {{ art.date | date('d-m-Y') }}</small>
                             </h3>
                         </div>
@@ -40,19 +40,11 @@
                                 <input type="hidden" name="user" value="{{ art.user.id }}">
                                 <input type="hidden" name="titre" value="{{ art.titre }}">
                                 <input type="hidden" name="img" value="{{ art.image.id }}">
-                                <input type="hidden" name="id" value="{{ art.id }}">
+                                <input id="idArticle" type="hidden" name="id" value="{{ art.id }}">
                                 <input type="submit" class="btn btn-success" value="Envoyer">
                             </form>
                         </div>
                     {% endif %}
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-drgdr
-                        </div>
-                        <div class="panel-body">
-                            drgdr
-                        </div>
-                    </div>
                 {% endfor %}
             </div>
             {#<div class="col-lg-1">#}
@@ -60,12 +52,103 @@ drgdr
             {#</div>#}
         </div>
     </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-offset-1 col-lg-10">
+                <div class="jumbotron" style="background-color: #e5e5e5">
+                    {#<div class="commentaireBody">#}
+                        {{ form_start(form) }}
+                        {{ form_errors(form) }}
+                            <div class="form-group">
+                                <div class="col-lg-6"> {{ form_label(form.titre, "Titre du commentaire", {'label_attr': {'class': 'control-label'}}) }}</div><div class="col-lg-6"> <div class="pull-right" style="color:red">{{ form_errors(form.titre) }}</div></div></br>
+                                {#<div class="col-lg-412">#}
+                                {{ form_widget(form.titre, {'attr': {'class': 'form-control'}}) }}
+                                {#</div>#}
+                                {#<div class="col-lg-4">#}
+                                {#</div>#}
+                            </div>
+                             <div class="form-group">
+                                {{ form_label(form.message, "Message", {'label_attr': {'class': 'col-lg-3 control-label texareaCommentaire'}}) }}</br>
+                                {#<div class="col-lg-12">#}
+                                    {{ form_widget(form.message, {'attr': {'class': 'form-control'}}) }}
+                                {#</div>#}
+                                {#<div class="col-lg-4">#}
+                                    <div style="color:red">{{ form_errors(form.message) }}</div>
+                                {#</div>#}
+                            </div>
+
+                             {#<div class="form-group">#}
+                                 {#<div class="col-lg-offset-5 col-lg-3">#}
+                                    {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary',}}) }}
+                                {#</div>#}
+                            {#</div>#}
+                            {#</div>#}
+
+                        {{ form_end(form) }}
+                    {% for comment in commentaires %}
+                    <div class="commentaireBody" style="border-top: solid 1px #000000">
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <button id="" idcomm="{{ comment.id }}" class="supprimerCommentaire pull-right glyphicon glyphicon-remove btn-danger" data-toggle="tooltip" title="Supprimer le commentaire"></button>
+                            <a id="lienCommentaire" href="{{ path('deleteCommentaire',{'id' : comment.id}) }}"></a>
+                        {% endif %}
+                        <p class="pArticleTitre text-center"><strong>{{ comment.titre | capitalize }}</strong></p>
+                        {#<img class="" style="width: 50px;position: relative; left: 624px; top:-70px ;" src="{{ asset('/bundles/sharineuser/img/ruban.jpg') }}">#}
+                        <p class="pArticleBody">{{ comment.message |capitalize}}</p>
+                        <p class="pArticleTitre"></p>
+                        <footer class="pArticleFooter">
+                            <blockquote  class="pull-left">
+                                <footer style="color:#2aabd2">
+                                    {{ comment.username | capitalize}}
+                                </footer>
+                            </blockquote>
+                            <small class="pull-right">{{ comment.date| date('d-M-Y H:i:s') }}</small>
+                        </footer>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
+
+        $(function(){
+            $("#sharine_articlebundle_commentaire_titre").val('')
+            $("#sharine_articlebundle_commentaire_message").val('')
+        });
+
+        $(".supprimerCommentaire").on("click", function () {
+            var idCommentaire = $(this).attr('idComm');
+            bootbox.dialog({
+                message: "Voulez vous vraiment supprimer ce commentaire définitivement ?",
+                title: "Suppression de commentaire",
+                buttons: {
+                    success: {
+                        label: "Confirmer",
+                        className: "btn-success",
+                        callback: function() {
+                            $.ajax({
+                                url : '{{ path('deleteCommentaire') }}',
+                                type : 'POST',
+                                data : 'idComm=' + idCommentaire,
+                                success : function(data){
+                                    location.reload();
+                                }
+                        });
+                        }
+                    },
+                    danger: {
+                        label: "Annuler",
+                        className: "btn-danger"
+                    }
+                }
+            });
+        });
+
         $("#refuser").on("click", function () {
             $("#formRefuser").removeClass('hidden');
         });
-    </script>
 
+    </script>
     {% block login %}
     {% endblock %}
 {% endblock %}

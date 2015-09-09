@@ -21,6 +21,7 @@
                                         <th class="text-center" data-field="name">E-mail</th>
                                         <th class="text-center" data-field="name">Nombre de publications</th>
                                         <th class="text-center" data-field="name">Status</th>
+                                        <th class="text-center" data-field="name">Etat</th>
                                         <th data-field="name"></th>
                                     </tr>
                                     </thead>
@@ -35,6 +36,11 @@
                                             <td data-field="id">{{ users.username | capitalize }}</td>
                                             <td data-field="name">{{ users.email | capitalize }}</td>
                                             <td data-field="name">{{ nbArticles[users.id] | capitalize }}</td>
+                                            {% if roles[users.id] == "" %}
+                                                <td data-field="name">Membre<span statusActuel="Membre" idu="{{ users.id }}" class="changerStatus glyphicon glyphicon-refresh cursors" data-toggle="tooltip" title="Changer l'utilisateur de status"></span></td>
+                                            {% else %}
+                                                <td data-field="name"><span  style="color: #2aabd2">Admin</span> <span statusActuel="Admin" idu="{{ users.id }}" class="changerStatus glyphicon glyphicon-refresh cursors" data-toggle="tooltip" title="Changer l'utilisateur de status"></span></td>
+                                            {% endif %}
                                             {% if users.is_archive == 1 %}
                                                 <td data-field="name">Archivé</td>
                                                 <td data-field="desarchiver"><a href="{{ path('archiverUser', {'idUser':users.id,'archive':0,'desarchive':1}) }}"><button id="desarchiver" class="glyphicon glyphicon-cog btn-info" data-toggle="tooltip" title="Désarchiver l'utilisateur"></button></a></td>
@@ -53,11 +59,20 @@
             </div>
         </div>
     </div>
-    <script type="text/javascript">
-        $(function() {
-            $("body").tooltip({ selector: '[data-toggle=tooltip]',placement:'right' });
+<script>
+    $(".changerStatus").on("click",function(){
+       var statusActuel = $(this).attr('statusActuel');
+       var user = $(this).attr('idu');
+        $.ajax({
+            url : '{{ path('changerStatusUser') }}',
+            type : 'POST',
+            data : 'user=' + user + '&status=' + statusActuel,
+            success : function(data){
+                location.reload();
+            }
         });
-    </script>
+    });
+</script>
     {% endblock %}
     {% block login %}
     {% endblock %}

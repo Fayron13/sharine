@@ -22,7 +22,8 @@ security:
     access_control:
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin/kcfinder*, role: ROLE_ADMIN }
+        - { path: ^/home/admin, role: ROLE_ADMIN }
+        - { path: ^/utilisateurGestion, role: ROLE_ADMIN }
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs

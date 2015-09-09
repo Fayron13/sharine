@@ -2,9 +2,11 @@
 
 namespace SHARINE\ArticleBundle\Controller;
 use SHARINE\ArticleBundle\Entity\Article;
+use SHARINE\ArticleBundle\Entity\Commentaire;
 use SHARINE\ArticleBundle\Form\ArticleType;
-use SHARINE\ArticleBundle\Form\BodyArticleType;
+use SHARINE\ArticleBundle\Form\CommentaireType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Constraints\DateTime;
 
@@ -69,11 +71,32 @@ class ArticleController extends Controller
         return $this->render('SHARINEUserBundle:Registration:checkEmail.html.twig');
     }
 
-    public function publicationAction($id=null){
+    public function publicationAction($id=null,Request $request){
+        $user = $this->getDoctrine()->getManager()->getRepository('SHARINEUserBundle:User')->find($this->container->get('security.context')->getToken()->getUser()->getId());
+        $commentaireType = new Commentaire();
+        $form = $this->get('form.factory')->create(new CommentaireType(), $commentaireType);
         $articles = $this->getDoctrine()->getManager()->getRepository('SHARINEArticleBundle:Article')->getArticlesByIdArticle($id);
+        $commentaires = $this->getDoctrine()->getManager()->getRepository('SHARINEArticleBundle:Commentaire')->getCommentairesByArticle($id);
+        if ($form->handleRequest($request)->isValid()) {
+            $commentaireType->setDate(new \Datetime("now"));
+            $commentaireType->setUser($user);
+            $commentaireType->setArticle($this->getDoctrine()->getManager()->getRepository('SHARINEArticleBundle:Article')->find($id));
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($commentaireType);
+            $em->flush();
+            header("location: ".$request->getUri());
+            exit();
+
+        }
+
+
+
         return $this->render('SHARINEArticleBundle:Article:bodyArticle.html.twig', array(
             'id' => $id,
-            'article' => $articles
+            'article' => $articles,
+            'commentaires' => $commentaires,
+            'form' => $form->createView(),
+//            'pagination' => $pagination
         ));
     }
 
@@ -117,8 +140,7 @@ class ArticleController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->remove($art);
         $em->flush();
-//        $this->getDoctrine()->getManager()->getRepository('SHARINEArticleBundle:Article')->deletePublication($id);
-//        $this->getDoctrine()->getManager()->getRepository('SHARINEArticleBundle:Image')->deleteImg($image_id);
+
         $articles = $this->getDoctrine()->getManager()->getRepository('SHARINEArticleBundle:Article')->getAllArticlesAdmin();
         $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate($articles, $this->get('request')->query->get('page', 1), 5);
@@ -130,5 +152,14 @@ class ArticleController extends Controller
         ));
     }
 
+    public function deleteCommentaireAction(Request $request){
+        $idCommentaire = $this->getRequest()->get('idComm');
+        $Commentaire = $this->getDoctrine()->getManager()->getRepository('SHARINEArticleBundle:Commentaire')->find($idCommentaire);
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($Commentaire);
+        $em->flush();
+
+        return new Response(0);
+    }
 
 }
